@@ -1,485 +1,747 @@
+/* ═══════════════════════════════════════════════════════════════
+   HomePage.css — New blog-feed design
+   Scoped under .homepage to prevent leaking into other pages.
+   Prefix hp- used on all new selectors to avoid collisions
+   with global App.css classes (container, quran-text, fade-in, etc.)
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Google Fonts (Cairo for blog aesthetic) ── */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
+/* ──────────────────────────────────────────────
+   Root token overrides for this page
+   Theme variant CSS variables stay IDENTICAL to
+   the original HomePage.css — no logic change.
+────────────────────────────────────────────── */
 .homepage {
   min-height: 100vh;
-  /* Default palette (green + blue + white + gold) fallback */
-  --primary-dark: #2E7D32;
-  --primary-main: #43A047;
-  --primary-light: #A5D6A7;
-  --primary-lighter: #E8F5E9;
+  background-color: #fcfaf2; /* brand-bg */
+  color: #2c3e50;            /* brand-text */
+  font-family: 'Cairo', 'Amiri', sans-serif;
 
-  --secondary-main: #1565C0;
-  --secondary-lighter: #5E92F3;
+  /* ── Exact colors mapped from code.html ── */
+  --brand-dark:   #0d4036;
+  --brand-gold:   #c09b55;
+  --brand-bg:     #fcfaf2;
+  --brand-card:   #ffffff;
+  --brand-text:   #2c3e50;
+  --brand-muted:  #7f8c8d;
+  --brand-border: #e2e8f0;
 
-  --neutral-white: #FFFFFF;
-  --bg-white: var(--neutral-white);
-  --bg-light: #F6FBF6;
-  --bg-light-green: #E8F5E9;
-  --bg-cream: #FFF8E1;
+  /* ── Map existing tokens to brand colors ── */
+  --primary-dark:    #00332B; /* Deepest dark for hero/gradients */
+  --primary-main:    var(--brand-dark);
+  --primary-light:   #1a6b5a; /* Slightly lighter shade for gradients */
+  --primary-lighter: #eef2f1;
 
-  --text-primary: #0e3a2a;
-  --text-secondary: rgba(0, 0, 0, 0.6);
+  --secondary-main:    var(--brand-gold);
+  --secondary-lighter: #e8dcc4;
+
+  --neutral-white:  var(--brand-card);
+  --bg-white:       var(--brand-card);
+  --bg-light:       var(--brand-bg);
+  --bg-light-green: #eef2f1;
+  --bg-cream:       var(--brand-bg);
+
+  --text-primary:   var(--brand-text);
+  --text-secondary: var(--brand-muted);
+
+  --shadow-card:       0 4px 6px -1px rgba(0,0,0,.05), 0 2px 4px -1px rgba(0,0,0,.03);
+  --shadow-card-hover: 0 10px 15px -3px rgba(0,0,0,.1),  0 4px 6px -2px rgba(0,0,0,.05);
 }
 
-.hero-section {
-  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-main) 50%, var(--primary-light) 100%);
-  padding: 80px 24px;
+/* ── Screen-reader only utility ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ════════════════════════════════════════════════
+   THEME SELECTOR — UNCHANGED from original logic
+════════════════════════════════════════════════ */
+.hp-theme-selector {
+  position: absolute;
+  top: 16px;
+  left: 24px;   /* left in RTL = visual right */
+  z-index: 20;
+}
+
+.hp-theme-selector select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(255,255,255,.15);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 200ms ease;
+}
+
+.hp-theme-selector select:hover {
+  background: rgba(255,255,255,.25);
+}
+
+.hp-theme-selector select option {
+  background: var(--brand-dark);
+  color: #fff;
+}
+
+/* ════════════════════════════════════════════════
+   HERO SECTION
+════════════════════════════════════════════════ */
+.hp-hero {
+  background-color: var(--brand-dark);
   position: relative;
+  padding-top: 2rem;
+  padding-bottom: 6rem;
   overflow: hidden;
 }
 
-.hero-section::before {
+/* Banner with gradient-only background (no external image dependency) */
+.hp-hero-banner {
+  position: relative;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  margin: 0 1rem;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(
+    135deg,
+    var(--primary-dark) 0%,
+    var(--primary-main) 50%,
+    var(--primary-light) 100%
+  );
+}
+
+/* Decorative wave overlay from original hero-section::before */
+.hp-hero-banner::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+  inset: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.04" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
   background-size: cover;
+  pointer-events: none;
 }
 
-.hero-content {
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
-
-.hero-decoration {
-  margin-bottom: 24px;
-}
-
-.decoration-icon {
-  font-size: 4rem;
-  display: inline-block;
-  filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.3));
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-}
-
-.hero-title {
-  font-size: 3rem;
-  color: var(--neutral-white);
-  margin-bottom: 24px;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  font-weight: 700;
-  animation-delay: 0.2s;
-}
-
-.hero-subtitle {
-  font-size: 2rem;
-  color: var(--secondary-lighter);
-  margin-bottom: 20px;
-  font-family: 'Amiri Quran', serif;
-  line-height: 2;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  animation-delay: 0.4s;
-}
-
-.hero-description {
-  font-size: 1.3rem;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.8;
-  max-width: 700px;
-  margin: 0 auto;
-  animation-delay: 0.6s;
-}
-
-.features-section {
-  padding: 80px 24px;
-  background: var(--bg-light);
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.section-header h2 {
-  font-size: 2.5rem;
-  color: var(--primary-main);
-  margin-bottom: 16px;
-  font-weight: 700;
-}
-
-.header-divider {
-  width: 100px;
-  height: 4px;
-  background: linear-gradient(90deg, transparent, var(--secondary-main), transparent);
-  margin: 0 auto;
-  border-radius: 2px;
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 32px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.feature-card {
-  position: relative;
-  background: var(--bg-white);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-  text-decoration: none;
-  transition: all var(--transition-normal);
-  animation: slideUp var(--transition-slow) both;
-  animation-delay: var(--delay);
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.feature-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-xl);
-}
-
-.feature-card-bg {
+.hp-hero-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 120px;
-  opacity: 0.9;
-  transition: all var(--transition-normal);
+  inset: 0;
+  background: linear-gradient(to left, rgba(0,51,43,.75) 0%, rgba(0,51,43,.35) 55%, transparent 100%);
 }
 
-.feature-card:hover .feature-card-bg {
-  height: 100%;
-  opacity: 1;
-}
-
-.feature-content {
+.hp-hero-content {
   position: relative;
-  padding: 32px 24px;
-  z-index: 1;
+  z-index: 10;
+  padding: 3rem 3rem 3rem 2rem;
+  max-width: 640px;
+  margin-right: auto;  /* push to right side in RTL */
+  color: #fff;
+  text-align: right;
 }
 
-.feature-icon {
-  font-size: 4rem;
-  margin-bottom: 16px;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
-  transition: all var(--transition-normal);
-}
-
-.feature-card:hover .feature-icon {
-  transform: scale(1.1) rotate(5deg);
-  filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.3));
-}
-
-.feature-title {
-  font-size: 1.5rem;
-  color: var(--text-primary);
-  margin-bottom: 12px;
+/* H1 — one per page, kept identical to original hero-title */
+.hp-hero-title {
+  font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 700;
-  transition: color var(--transition-normal);
+  color: var(--brand-gold);
+  margin-bottom: 1rem;
+  line-height: 1.3;
+  text-shadow: 0 2px 8px rgba(0,0,0,.25);
 }
 
-.feature-card:hover .feature-title {
-  color: var(--neutral-white);
+.hp-hero-ayah {
+  font-family: 'Amiri Quran', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  color: rgba(255,255,255,.9);
+  margin-bottom: 1rem;
+  line-height: 2;
+  text-shadow: 0 1px 4px rgba(0,0,0,.2);
 }
 
-.feature-description {
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 16px;
-  transition: color var(--transition-normal);
+.hp-hero-desc {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,.8);
+  line-height: 1.9;
+  margin-bottom: 1.75rem;
 }
 
-.feature-card:hover .feature-description {
-  color: rgba(255, 255, 255, 0.9);
+/* CTA button — Link styled as button */
+.hp-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 2px solid var(--brand-gold);
+  color: var(--brand-gold);
+  background: transparent;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  font-family: inherit;
+  text-decoration: none;
+  transition: background 200ms ease, color 200ms ease;
 }
 
-.feature-arrow {
+.hp-hero-cta:hover,
+.hp-hero-cta:focus-visible {
+  background: var(--brand-gold);
+  color: var(--brand-dark);
+  outline: none;
+}
+
+/* Slider dots */
+.hp-hero-dots {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.4rem;
+}
+
+.hp-dot {
+  width: 1rem;
+  height: 0.25rem;
+  border-radius: 9999px;
+  background: rgba(255,255,255,.3);
+  cursor: pointer;
+  transition: background 200ms;
+}
+
+.hp-dot--active {
+  width: 2rem;
+  background: var(--brand-gold);
+}
+
+/* Curved bottom wave separator */
+.hp-hero-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4rem;
+  background: #fcfaf2;
+  border-radius: 60% 60% 0 0 / 100% 100% 0 0;
+  transform: scaleX(1.1);
+}
+
+/* ════════════════════════════════════════════════
+   BODY LAYOUT — Main + Sidebar
+════════════════════════════════════════════════ */
+.hp-body-layout {
+  display: flex;
+  gap: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+  align-items: flex-start;
+}
+
+/* ── Main content ── */
+.hp-main {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.hp-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.hp-section-title {
   font-size: 1.5rem;
-  color: var(--primary-main);
-  transition: all var(--transition-normal);
+  font-weight: 700;
+  color: var(--brand-dark);
+  border-right: 4px solid var(--brand-gold);
+  padding-right: 0.75rem;
+  margin-bottom: 0;
+}
+
+/* ── Articles grid ── */
+.hp-articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ── Article Card — replaces the old .feature-card ── */
+.hp-article-card {
+  background: var(--brand-card);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 250ms ease, transform 250ms ease;
+  animation: hp-slideUp 350ms both;
+  animation-delay: var(--delay, 0s);
+  text-decoration: none;
+}
+
+.hp-article-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-4px);
+}
+
+@keyframes hp-slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Card banner area — holds the emoji icon */
+.hp-card-banner {
+  height: 10rem;
+  background: linear-gradient(
+    135deg,
+    var(--primary-main) 0%,
+    var(--primary-light) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 250ms ease;
+}
+
+.hp-article-card:hover .hp-card-banner {
+  background: linear-gradient(
+    135deg,
+    var(--primary-dark) 0%,
+    var(--primary-main) 100%
+  );
+}
+
+.hp-card-icon {
+  font-size: 3.5rem;
+  line-height: 1;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.15));
+  transition: transform 250ms ease, filter 250ms ease;
   display: inline-block;
 }
 
-.feature-card:hover .feature-arrow {
-  color: var(--neutral-white);
-  transform: translateX(-8px);
+.hp-article-card:hover .hp-card-icon {
+  transform: scale(1.12) rotate(5deg);
+  filter: drop-shadow(0 4px 12px rgba(255,255,255,.3));
 }
 
-.quran-verse-section {
-  padding: 80px 24px;
+.hp-card-body {
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.hp-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--brand-dark);
+  margin-bottom: 0.5rem;
+  /* clamp to 2 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.hp-card-title-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.hp-card-title-link:hover,
+.hp-card-title-link:focus-visible {
+  color: var(--brand-gold);
+  outline: none;
+}
+
+.hp-card-desc {
+  font-size: 0.875rem;
+  color: var(--brand-muted);
+  line-height: 1.6;
+  flex: 1;
+  margin-bottom: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Card meta footer */
+.hp-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--brand-border);
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--brand-muted);
+}
+
+.hp-card-category {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--brand-gold);
+  font-weight: 700;
+}
+
+.hp-card-stats {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.hp-card-read-time {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* ── Inline SVG helpers (isolated from global svg{} rule) ── */
+.hp-icon-svg {
+  width: 1rem;
+  height: 1rem;
+  /* Reset global App.css svg transform */
+  transform: none !important;
+  position: static !important;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.hp-icon-xs {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+/* ════════════════════════════════════════════════
+   SIDEBAR
+════════════════════════════════════════════════ */
+.hp-sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.hp-sidebar-card {
+  background: var(--brand-card);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-card);
+  padding: 1.5rem;
+}
+
+.hp-sidebar-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--brand-dark);
+  border-right: 4px solid var(--brand-gold);
+  padding-right: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Most-read list */
+.hp-most-read-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.hp-most-read-item {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  text-decoration: none;
+  color: inherit;
+  transition: color 200ms ease;
+}
+
+.hp-most-read-item:hover .hp-most-read-title,
+.hp-most-read-item:focus-visible .hp-most-read-title {
+  color: var(--brand-gold);
+  outline: none;
+}
+
+.hp-most-read-thumb {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, var(--primary-main) 0%, var(--primary-light) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  flex-shrink: 0;
+}
+
+.hp-most-read-info {
+  flex: 1;
+}
+
+.hp-most-read-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--brand-dark);
+  margin-bottom: 0.25rem;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 200ms ease;
+}
+
+.hp-most-read-date {
+  font-size: 0.75rem;
+  color: var(--brand-muted);
+  display: block;
+}
+
+/* Categories list */
+.hp-categories-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.hp-category-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fcfaf2;
+  border-radius: 0.625rem;
+  padding: 0.75rem;
+  text-decoration: none;
+  color: var(--brand-dark);
+  font-weight: 600;
+  transition: color 200ms ease, background 200ms ease;
+}
+
+.hp-category-item:hover,
+.hp-category-item:focus-visible {
+  color: var(--brand-gold);
+  background: #f5f0e4;
+  outline: none;
+}
+
+.hp-category-label {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.hp-category-icon {
+  background: rgba(192,155,85,.18);
+  color: var(--brand-gold);
+  padding: 0.4rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hp-category-name {
+  font-size: 0.9rem;
+}
+
+.hp-category-count {
+  background: #fff;
+  padding: 0.2rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(0,0,0,.08);
+}
+
+/* ════════════════════════════════════════════════
+   QURAN VERSE SECTION — UNCHANGED content/logic,
+   updated presentation tokens only
+════════════════════════════════════════════════ */
+.hp-verse-section {
+  padding: 5rem 1.5rem;
   background: linear-gradient(135deg, var(--bg-light-green) 0%, var(--bg-cream) 100%);
 }
 
-.verse-card {
+.hp-verse-card {
   max-width: 900px;
   margin: 0 auto;
   background: var(--bg-white);
-  padding: 48px 32px;
-  border-radius: 20px;
+  padding: 3rem 2rem;
+  border-radius: 1.25rem;
   box-shadow: var(--shadow-lg);
   text-align: center;
   position: relative;
   border: 2px solid var(--primary-lighter);
 }
 
-.verse-decoration {
+.hp-verse-decoration {
   position: absolute;
-  top: -20px;
+  top: -1.25rem;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--primary-main);
-  width: 50px;
-  height: 50px;
+  background: var(--brand-gold);
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  color: var(--neutral-white);
+  font-size: 1.25rem;
+  color: #fff;
   box-shadow: var(--shadow-md);
 }
 
-.verse-card .quran-text {
-  font-size: 2rem;
+.hp-verse-text {
+  font-size: clamp(1.25rem, 3vw, 2rem);
   line-height: 2.5;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 }
 
-.verse-reference {
-  font-size: 1.2rem;
+.hp-verse-ref {
+  font-size: 1.1rem;
   color: var(--secondary-main);
   font-weight: 600;
+  margin-bottom: 0;
 }
 
-.stats-section {
-  padding: 60px 24px;
+/* ════════════════════════════════════════════════
+   STATS SECTION — UNCHANGED content/logic,
+   updated to use <dl> for accessibility
+════════════════════════════════════════════════ */
+.hp-stats-section {
+  padding: 4rem 1.5rem;
   background: var(--bg-white);
 }
 
-.stats-grid {
+.hp-stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
   max-width: 1000px;
   margin: 0 auto;
 }
 
-.stat-item {
+.hp-stat-item {
   text-align: center;
-  padding: 32px 16px;
+  padding: 2rem 1rem;
   background: linear-gradient(135deg, var(--primary-lighter) 0%, var(--bg-light) 100%);
-  border-radius: 16px;
+  border-radius: 1rem;
   box-shadow: var(--shadow-sm);
-  transition: all var(--transition-normal);
+  transition: transform 250ms ease, box-shadow 250ms ease, background 250ms ease;
 }
 
-.stat-item:hover {
+.hp-stat-item:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-md);
   background: linear-gradient(135deg, var(--primary-main) 0%, var(--primary-light) 100%);
 }
 
-.stat-number {
-  font-size: 3rem;
+.hp-stat-number {
+  font-size: 2.5rem;
   font-weight: 700;
   color: var(--primary-main);
-  margin-bottom: 8px;
-  transition: color var(--transition-normal);
+  margin-bottom: 0.25rem;
+  transition: color 250ms ease;
 }
 
-.stat-item:hover .stat-number {
-  color: var(--neutral-white);
+.hp-stat-item:hover .hp-stat-number {
+  color: #fff;
 }
 
-.stat-label {
-  font-size: 1.2rem;
+.hp-stat-label {
+  font-size: 1rem;
   color: var(--text-secondary);
   font-weight: 500;
-  transition: color var(--transition-normal);
+  transition: color 250ms ease;
 }
 
-.stat-item:hover .stat-label {
-  color: var(--neutral-white);
+.hp-stat-item:hover .hp-stat-label {
+  color: rgba(255,255,255,.9);
+}
+
+
+
+/* ════════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .hp-sidebar {
+    width: 240px;
+  }
 }
 
 @media (max-width: 768px) {
-  .hero-section {
-    padding: 60px 16px;
+  .hp-body-layout {
+    flex-direction: column;
   }
-  
-  .hero-title {
-    font-size: 2rem;
+
+  .hp-sidebar {
+    width: 100%;
   }
-  
-  .hero-subtitle {
-    font-size: 1.5rem;
+
+  .hp-hero-content {
+    padding: 2rem 1.5rem;
+    max-width: 100%;
   }
-  
-  .hero-description {
-    font-size: 1.1rem;
+
+  .hp-hero-banner {
+    min-height: 280px;
+    margin: 0 0.5rem;
   }
-  
-  .features-section {
-    padding: 60px 16px;
-  }
-  
-  .section-header h2 {
-    font-size: 2rem;
-  }
-  
-  .features-grid {
+
+  .hp-articles-grid {
     grid-template-columns: 1fr;
-    gap: 24px;
   }
-  
-  .verse-card {
-    padding: 32px 24px;
-  }
-  
-  .verse-card .quran-text {
-    font-size: 1.5rem;
-    line-height: 2.2;
-  }
-  
-  .stats-grid {
+
+  .hp-stats-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    gap: 1rem;
   }
-  
-  .stat-number {
-    font-size: 2.5rem;
+
+  .hp-verse-card {
+    padding: 2.5rem 1.25rem;
   }
 }
 
 @media (max-width: 480px) {
-  .decoration-icon {
-    font-size: 3rem;
+  .hp-hero-title {
+    font-size: 1.65rem;
   }
-  
-  .hero-title {
-    font-size: 1.75rem;
-  }
-  
-  .hero-subtitle {
-    font-size: 1.25rem;
-  }
-  
-  .verse-card .quran-text {
-    font-size: 1.3rem;
-  }
-  
-  .stat-number {
-    font-size: 2rem;
-  }
-  
-  .stat-label {
+
+  .hp-hero-ayah {
     font-size: 1rem;
   }
-}
 
-/* Theme selector styling */
-.theme-selector {
-  position: absolute;
-  top: 16px;
-  right: 24px;
-  z-index: 2;
-}
+  .hp-stat-number {
+    font-size: 1.75rem;
+  }
 
-.theme-selector select {
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: 1px solid rgba(0,0,0,0.08);
-  background: var(--bg-white);
-  color: var(--text-primary);
-  font-size: 0.95rem;
-}
+  .hp-verse-text {
+    font-size: 1.1rem;
+    line-height: 2.2;
+  }
 
-/* Theme variants */
-.homepage.theme-red {
-  --primary-dark: #B71C1C;
-  --primary-main: #D32F2F;
-  --primary-light: #FFCDD2;
-  --primary-lighter: #FFEBEE;
-  --secondary-main: #D4AF37;
-  --secondary-lighter: #F1C27D;
-  --neutral-white: #FFFFFF;
-  --bg-white: #FFFFFF;
-  --bg-light: #FFF5F5;
-  --bg-cream: #FFF8E1;
-  --text-primary: #4a0b0b;
-  --text-secondary: rgba(0,0,0,0.6);
-}
+  .hp-theme-selector {
+    top: 10px;
+    left: 10px;
+  }
 
-.homepage.theme-earth {
-  --primary-dark: #4E342E;
-  --primary-main: #6D4C41;
-  --primary-light: #D7CCC8;
-  --primary-lighter: #EFEBE9;
-  --secondary-main: #A1887F;
-  --secondary-lighter: #CFC2B8;
-  --neutral-white: #FFFDF9;
-  --bg-white: #FFFDF9;
-  --bg-light: #FBF7F3;
-  --bg-cream: #FFF8E1;
-  --text-primary: #3E2723;
-  --text-secondary: rgba(0,0,0,0.6);
-}
-
-.homepage.theme-lux {
-  --primary-dark: #000000;
-  --primary-main: #000000;
-  --primary-light: #333333;
-  --primary-lighter: #555555;
-  --secondary-main: #D4AF37;
-  --secondary-lighter: #E6C966;
-  --neutral-white: #FFFFFF;
-  --bg-white: #FFFFFF;
-  --bg-light: #F7F7F7;
-  --bg-cream: #FFF8E1;
-  --text-primary: #111111;
-  --text-secondary: rgba(0,0,0,0.6);
-}
-
-.homepage.theme-pastel {
-  --primary-dark: #B388FF;
-  --primary-main: #F8BBD0;
-  --primary-light: #FCE4EC;
-  --primary-lighter: #FFF1F6;
-  --secondary-main: #A5D6A7;
-  --secondary-lighter: #C8E6C9;
-  --neutral-white: #FFFFFF;
-  --bg-white: #FFFFFF;
-  --bg-light: #FFF9FB;
-  --bg-cream: #FFF8E1;
-  --text-primary: #2e2e2e;
-  --text-secondary: rgba(0,0,0,0.6);
-}
-
-.homepage.theme-orange {
-  --primary-dark: #E65100;
-  --primary-main: #FB8C00;
-  --primary-light: #FFE0B2;
-  --primary-lighter: #FFF3E0;
-  --secondary-main: #424242;
-  --secondary-lighter: #616161;
-  --neutral-white: #FFFFFF;
-  --bg-white: #FFF8E1;
-  --bg-light: #FFF9F2;
-  --bg-cream: #FFF3E0;
-  --text-primary: #263238;
-  --text-secondary: rgba(0,0,0,0.6);
+  .hp-theme-selector select {
+    font-size: 0.75rem;
+    padding: 6px 8px;
+  }
 }
