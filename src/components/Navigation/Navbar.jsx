@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useTheme } from '../../context/ThemeContext';
 import './Navbar.css';
 
 const NAV_LINKS = [
@@ -13,7 +12,6 @@ const NAV_LINKS = [
 
 function Navbar() {
   const [isOpen, setIsOpen]     = useState(false);
-  const { isDark, toggleTheme } = useTheme();
   const location                = useLocation();
 
   const isActive   = (path) => location.pathname === path;
@@ -50,16 +48,6 @@ function Navbar() {
 
           {/* ── Right-side controls ── */}
           <div className="nb-controls">
-            {/* Dark / Light toggle */}
-            <button
-              className="nb-theme-btn"
-              onClick={toggleTheme}
-              aria-label={isDark ? 'التبديل إلى الوضع الفاتح' : 'التبديل إلى الوضع الداكن'}
-              aria-pressed={isDark}
-            >
-              <span aria-hidden="true">{isDark ? '☀️' : '🌙'}</span>
-            </button>
-
             {/* Mobile hamburger */}
             <button
               className={`nb-hamburger ${isOpen ? 'nb-hamburger--open' : ''}`}
@@ -106,15 +94,6 @@ function Navbar() {
                 );
               })}
             </ul>
-
-            <button
-              className="nb-theme-btn nb-theme-btn--drawer"
-              onClick={toggleTheme}
-              aria-label={isDark ? 'التبديل إلى الوضع الفاتح' : 'التبديل إلى الوضع الداكن'}
-            >
-              <span aria-hidden="true">{isDark ? '☀️' : '🌙'}</span>
-              <span>{isDark ? 'الوضع الفاتح' : 'الوضع الداكن'}</span>
-            </button>
           </div>
         </div>
       </nav>

@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 import { theme as lightTheme } from '../styles/theme';
 
 const ThemeContext = createContext();
@@ -12,26 +12,14 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }) => {
-  const [isDark, setIsDark] = useState(() => {
-    const saved = localStorage.getItem('theme');
-    return saved === 'dark';
-  });
-
   useEffect(() => {
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    document.body.classList.toggle('dark-mode', isDark);
-  }, [isDark]);
+    localStorage.removeItem('theme');
+    document.body.classList.remove('dark-mode');
+  }, []);
 
-  const toggleTheme = () => setIsDark(!isDark);
-
-  const theme = isDark ? {
-    ...lightTheme.dark,
-    fonts: lightTheme.fonts,
-    spacing: lightTheme.spacing,
-    borderRadius: lightTheme.borderRadius,
-    shadows: lightTheme.shadows,
-    transitions: lightTheme.transitions
-  } : lightTheme.colors;
+  const isDark = false;
+  const toggleTheme = () => {};
+  const theme = lightTheme.colors;
 
   return (
     <ThemeContext.Provider value={{ theme, isDark, toggleTheme }}>

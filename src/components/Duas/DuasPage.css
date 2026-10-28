@@ -1,263 +1,1038 @@
+/* ========================================================
+   DuasPage.css — Luxury Emerald & Gold Islamic Redesign
+   Strictly scoped under .duas-page to prevent style leaks
+   ======================================================== */
+
 .duas-page {
-  padding: 40px 0;
+  direction: rtl;
+  font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+  background-color: #FAF9F4 !important;
+  background-image: 
+    radial-gradient(rgba(212, 175, 55, 0.12) 1px, transparent 1px),
+    radial-gradient(rgba(15, 107, 79, 0.06) 1px, #FAF9F4 1px) !important;
+  background-size: 32px 32px !important;
+  background-position: 0 0, 16px 16px !important;
   min-height: 100vh;
+  color: #292524;
+  padding-bottom: 60px;
 }
 
-.duas-layout {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 32px;
-  margin-top: 32px;
+.duas-page *,
+.duas-page *::before,
+.duas-page *::after {
+  box-sizing: border-box;
 }
 
-.categories-sidebar {
-  background: var(--bg-white);
-  padding: 24px;
-  border-radius: 16px;
-  box-shadow: var(--shadow-md);
-  height: fit-content;
-  position: sticky;
-  top: 90px;
-}
-
-.categories-sidebar h3 {
-  font-size: 1.3rem;
-  color: var(--primary-main);
-  margin-bottom: 20px;
-  padding-bottom: 12px;
-  border-bottom: 2px solid var(--primary-lighter);
-}
-
-.categories-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.category-btn {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
-  background: transparent;
-  border: 2px solid transparent;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  font-family: 'Amiri', serif;
-  font-size: 1rem;
-  text-align: right;
-  width: 100%;
-}
-
-.category-btn:hover {
-  background: var(--primary-lighter);
-  border-color: var(--primary-light);
-}
-
-.category-btn.active {
-  background: var(--primary-main);
-  color: var(--neutral-white);
-  border-color: var(--primary-main);
-}
-
-.category-icon {
-  font-size: 1.5rem;
-}
-
-.category-name {
-  flex: 1;
-  font-weight: 600;
-}
-
-.category-count {
-  background: rgba(0, 0, 0, 0.1);
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-
-.category-btn.active .category-count {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.duas-content {
-  min-height: 400px;
-}
-
-.category-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 32px;
-  padding: 24px;
-  background: linear-gradient(135deg, var(--primary-main) 0%, var(--primary-light) 100%);
-  border-radius: 16px;
-  color: var(--neutral-white);
-  box-shadow: var(--shadow-md);
-}
-
-.category-header-icon {
-  font-size: 3rem;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-}
-
-.category-header h2 {
-  font-size: 2rem;
-  margin: 0;
-  color: var(--neutral-white);
-}
-
-.duas-grid {
-  display: grid;
-  gap: 20px;
-}
-
-.dua-card {
-  background: var(--bg-white);
-  border-radius: 12px;
-  box-shadow: var(--shadow-sm);
-  border: 2px solid var(--neutral-gray);
-  transition: all var(--transition-normal);
+/* ========================================================
+   1. HERO SECTION
+   ======================================================== */
+.duas-page .duas-hero-section {
+  padding: 48px 20px 36px;
+  text-align: center;
+  position: relative;
   overflow: hidden;
 }
 
-.dua-card:hover {
-  box-shadow: var(--shadow-lg);
-  border-color: var(--primary-light);
+.duas-page .duas-hero-container {
+  max-width: 860px;
+  margin: 0 auto;
 }
 
-.dua-card-header {
-  display: flex;
-  justify-content: space-between;
+/* Top Badge */
+.duas-page .duas-hero-badge {
+  display: inline-flex;
   align-items: center;
-  padding: 20px 24px;
-  background: var(--bg-light);
-  border-bottom: 2px solid var(--neutral-gray);
+  gap: 8px;
+  background-color: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 9999px;
+  padding: 6px 18px;
+  color: #0F6B4F;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
-.dua-card-header h3 {
+.duas-page .duas-hero-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #D4AF37;
+  display: inline-block;
+  animation: duasPulseDot 2s ease-in-out infinite;
+}
+
+@keyframes duasPulseDot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.4);
+  }
+}
+
+/* Title & Subtitle */
+.duas-page .duas-hero-title {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #0F6B4F !important;
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  letter-spacing: -0.5px;
+}
+
+.duas-page .duas-hero-hands {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.duas-page .duas-hero-subtitle {
+  font-size: 1.1rem;
+  color: #57534e;
+  font-weight: 500;
+  line-height: 1.8;
+  max-width: 660px;
+  margin: 0 auto 30px;
+}
+
+/* Search Box */
+.duas-page .duas-search-box {
+  max-width: 680px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 8px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 10px 30px -5px rgba(15, 107, 79, 0.08), 0 4px 12px -2px rgba(212, 175, 55, 0.06);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.duas-page .duas-search-input-wrap {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.duas-page .duas-search-icon {
+  position: absolute;
+  right: 16px;
+  color: #D4AF37;
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+
+.duas-page .duas-search-input {
+  width: 100%;
+  padding: 12px 48px 12px 16px;
+  background-color: #fafaf9;
+  border: none;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: #1c1917;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.duas-page .duas-search-input:focus {
+  background-color: #ffffff;
+  box-shadow: 0 0 0 2px #0F6B4F;
+}
+
+.duas-page .duas-search-submit-btn {
+  padding: 12px 24px;
+  background-color: #0F6B4F;
+  color: #F3E4B2;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.duas-page .duas-search-submit-btn:hover {
+  background-color: #0a4231;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Quick Filter Chips */
+.duas-page .duas-quick-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.duas-page .duas-chips-label {
+  color: #78716c;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+.duas-page .duas-chip-btn {
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  background-color: #ffffff;
+  border: 1px solid #e7e5e4;
+  color: #44403c;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.duas-page .duas-chip-btn:hover {
+  border-color: #D4AF37;
+  color: #0F6B4F;
+  background-color: #FDFBF7;
+}
+
+.duas-page .duas-chip-btn.active {
+  background-color: #0F6B4F !important;
+  color: #F3E4B2 !important;
+  border-color: #0F6B4F !important;
+  font-weight: 700;
+}
+
+/* ========================================================
+   2. MAIN CONTENT GRID (CARDS ON RIGHT, SIDEBAR ON LEFT)
+   ======================================================== */
+.duas-page .duas-main-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.duas-page .duas-content-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 32px;
+  align-items: start;
+}
+
+/* ========================================================
+   3. CATEGORY HEADER BANNER
+   ======================================================== */
+.duas-page .duas-category-banner {
+  background: linear-gradient(135deg, #072e22 0%, #0F6B4F 60%, #0a4231 100%);
+  border-radius: 28px;
+  padding: 28px 32px;
+  color: #ffffff;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 12px 35px -5px rgba(15, 107, 79, 0.2);
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.duas-page .duas-banner-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.duas-page .duas-banner-main-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.duas-page .duas-banner-icon-box {
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.2);
+}
+
+.duas-page .duas-banner-text {
+  text-align: right;
+}
+
+.duas-page .duas-banner-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #E7CE7F;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.duas-page .duas-banner-title {
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0 0 4px;
+  line-height: 1.2;
+}
+
+.duas-page .duas-banner-desc {
+  font-size: 0.88rem;
+  color: #e7e5e4;
+  margin: 0;
+  max-width: 480px;
+}
+
+.duas-page .duas-play-all-btn {
+  padding: 10px 20px;
+  background-color: #D4AF37;
+  color: #072e22;
+  font-weight: 800;
+  font-size: 0.9rem;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.duas-page .duas-play-all-btn:hover {
+  background-color: #E7CE7F;
+  transform: translateY(-1px);
+}
+
+.duas-page .duas-play-all-btn.playing {
+  background-color: #e11d48;
+  color: #ffffff;
+}
+
+.duas-page .duas-banner-footer {
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: #d6d3d1;
+}
+
+.duas-page .duas-banner-footer b {
+  color: #F3E4B2;
+}
+
+/* ========================================================
+   4. DUA CARDS
+   ======================================================== */
+.duas-page .duas-cards-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.duas-page .duas-card {
+  background: #ffffff;
+  border-radius: 26px;
+  padding: 26px 28px;
+  border: 1px solid rgba(231, 228, 220, 0.9);
+  box-shadow: 0 10px 30px -5px rgba(15, 107, 79, 0.06), 0 4px 12px -2px rgba(212, 175, 55, 0.04);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.duas-page .duas-card:hover {
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 16px 35px -5px rgba(15, 107, 79, 0.1), 0 6px 16px -2px rgba(212, 175, 55, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Highlighted / Special Card */
+.duas-page .duas-card.highlight-card {
+  border: 2px solid rgba(212, 175, 55, 0.45);
+}
+
+.duas-page .duas-card.highlight-card:hover {
+  border-color: #D4AF37;
+}
+
+/* Ribbon Badge */
+.duas-page .duas-ribbon-badge {
+  position: absolute;
+  left: -42px;
+  top: 22px;
+  transform: rotate(-45deg);
+  background-color: #D4AF37;
+  color: #072e22;
+  font-size: 0.7rem;
+  font-weight: 900;
+  padding: 4px 44px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  letter-spacing: 0.5px;
+  z-index: 3;
+}
+
+/* Card Top Bar */
+.duas-page .duas-card-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f5f5f4;
+  margin-bottom: 18px;
+}
+
+.duas-page .duas-card-identity {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.duas-page .duas-card-badge-num {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: #ecfdf5;
+  color: #0F6B4F;
+  border: 1px solid #a7f3d0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.duas-page .duas-card-badge-num.gold-badge {
+  background-color: #FAF3DC;
+  color: #8E6F18;
+  border-color: #E7CE7F;
+}
+
+.duas-page .duas-card-heading {
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: #0a4231;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.duas-page .duas-card-heading .text-gold {
+  color: #D4AF37;
+  font-size: 0.85rem;
+}
+
+.duas-page .duas-card-sub {
+  font-size: 0.8rem;
+  color: #a8a29e;
+  font-weight: 500;
+  display: block;
+  margin-top: 2px;
+}
+
+/* Quick Action Buttons (Audio, Copy, Share) */
+.duas-page .duas-card-quick-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.duas-page .duas-action-icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background-color: transparent;
+  border: none;
+  color: #a8a29e;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.duas-page .duas-action-icon-btn:hover {
+  background-color: #f5f5f4;
+  color: #0F6B4F;
+}
+
+.duas-page .duas-action-icon-btn.copied {
+  color: #0F6B4F;
+  background-color: #ecfdf5;
+}
+
+.duas-page .duas-action-icon-btn.active-audio {
+  color: #D4AF37;
+  background-color: #072e22;
+}
+
+/* Card Body - Quranic Naskh Typography */
+.duas-page .duas-card-body-text {
+  margin: 12px 0 18px;
+  text-align: right;
+}
+
+.duas-page .duas-arabic-naskh {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-size: 1.6rem;
+  line-height: 2.3;
+  color: #0a3528 !important;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  margin: 0;
+  user-select: all;
+  -webkit-user-select: all;
+}
+
+/* Source & Benefit Box */
+.duas-page .duas-source-benefit-box {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background-color: #FAF9F4;
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.82rem;
+  color: #57534e;
+}
+
+.duas-page .duas-source-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.duas-page .duas-source-item i {
+  color: #B89223;
+}
+
+.duas-page .duas-source-item b {
+  color: #292524;
+}
+
+.duas-page .duas-benefit-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #0F6B4F;
+  font-weight: 700;
+  background-color: #ecfdf5;
+  padding: 4px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1fae5;
+  font-size: 0.78rem;
+}
+
+.duas-page .duas-benefit-pill i {
+  color: #D4AF37;
+}
+
+/* Special Virtue Highlight Box */
+.duas-page .duas-virtue-highlight-box {
+  margin-top: 16px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background-color: #FFFBEB;
+  border: 1px solid #F3E4B2;
+  font-size: 0.82rem;
+  color: #44403c;
+  line-height: 1.7;
+}
+
+.duas-page .duas-virtue-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.duas-page .duas-virtue-content i {
+  color: #D4AF37;
+  margin-top: 2px;
+  font-size: 0.95rem;
+}
+
+.duas-page .duas-virtue-content strong {
+  display: block;
+  color: #0a4231;
+  font-weight: 800;
+  margin-bottom: 2px;
+}
+
+/* Card Bottom Counter / Action Bar */
+.duas-page .duas-card-bottom-bar {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #f5f5f4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.duas-page .duas-card-repeat-meta {
+  font-size: 0.82rem;
+  color: #78716c;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.duas-page .duas-card-repeat-meta b {
+  color: #0F6B4F;
+}
+
+.duas-page .duas-card-counter-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Dot Indicators */
+.duas-page .duas-dot-indicators {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.duas-page .duas-count-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #e7e5e4;
+  transition: all 0.2s ease;
+}
+
+.duas-page .duas-count-dot.filled {
+  background-color: #0F6B4F;
+}
+
+/* Counter Trigger Button */
+.duas-page .duas-counter-trigger-btn {
+  padding: 9px 18px;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  background-color: #f5f5f4;
+  color: #44403c;
+  border: 1px solid #e7e5e4;
+}
+
+.duas-page .duas-counter-trigger-btn:hover {
+  background-color: #0F6B4F;
+  color: #F3E4B2;
+  border-color: #0F6B4F;
+}
+
+.duas-page .duas-counter-trigger-btn.completed {
+  background-color: #ecfdf5;
+  color: #0F6B4F;
+  border-color: rgba(15, 107, 79, 0.25);
+}
+
+.duas-page .duas-counter-trigger-btn.completed:hover {
+  background-color: #0F6B4F;
+  color: #F3E4B2;
+}
+
+.duas-page .duas-counter-trigger-btn.gold-btn {
+  background-color: #D4AF37 !important;
+  color: #072e22 !important;
+  border-color: #D4AF37 !important;
+  font-weight: 800;
+}
+
+.duas-page .duas-counter-trigger-btn.gold-btn:hover {
+  background-color: #E7CE7F !important;
+}
+
+/* Load More Section */
+.duas-page .duas-load-more-section {
+  text-align: center;
+  padding: 16px 0;
+}
+
+.duas-page .duas-load-more-btn {
+  padding: 14px 28px;
+  background-color: #ffffff;
+  border: 1px solid #e7e5e4;
+  color: #44403c;
+  font-weight: 700;
+  font-size: 0.92rem;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+}
+
+.duas-page .duas-load-more-btn:hover {
+  border-color: #D4AF37;
+  color: #0F6B4F;
+  box-shadow: 0 8px 20px rgba(15, 107, 79, 0.08);
+  transform: translateY(-1px);
+}
+
+.duas-page .duas-load-more-btn i {
+  color: #B89223;
+  font-size: 0.8rem;
+}
+
+/* Empty State */
+.duas-page .duas-empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #ffffff;
+  border-radius: 24px;
+  border: 1px dashed #d6d3d1;
+  color: #78716c;
+}
+
+.duas-page .duas-empty-state i {
+  font-size: 2.8rem;
+  color: #D4AF37;
+  margin-bottom: 16px;
+}
+
+.duas-page .duas-empty-state h3 {
   font-size: 1.3rem;
-  color: var(--primary-main);
+  color: #0a4231;
+  margin: 0 0 8px;
+}
+
+/* ========================================================
+   5. SIDEBAR (CATEGORIES & DAILY GOAL)
+   ======================================================== */
+.duas-page .duas-sidebar-sticky-card {
+  background-color: #ffffff;
+  border-radius: 26px;
+  padding: 24px;
+  border: 1px solid rgba(231, 228, 220, 0.9);
+  box-shadow: 0 10px 30px -5px rgba(15, 107, 79, 0.07), 0 4px 12px -2px rgba(212, 175, 55, 0.05);
+  position: sticky;
+  top: 24px;
+}
+
+.duas-page .duas-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #f5f5f4;
+  margin-bottom: 16px;
+}
+
+.duas-page .duas-sidebar-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.duas-page .duas-sidebar-accent-bar {
+  width: 4px;
+  height: 22px;
+  border-radius: 4px;
+  background-color: #D4AF37;
+}
+
+.duas-page .duas-sidebar-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #0a4231;
   margin: 0;
 }
 
-.expand-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 2px solid var(--primary-main);
-  background: var(--neutral-white);
-  color: var(--primary-main);
-  font-size: 1.5rem;
+.duas-page .duas-sidebar-badge-total {
+  font-size: 0.8rem;
   font-weight: 700;
+  color: #a8a29e;
+}
+
+/* Categories List */
+.duas-page .duas-category-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.duas-page .duas-category-nav-item {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid transparent;
+  background: transparent;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  text-align: right;
+}
+
+.duas-page .duas-category-nav-item:hover {
+  background-color: #fafaf9;
+  border-color: #e7e5e4;
+}
+
+.duas-page .duas-category-nav-item.active {
+  background-color: #0F6B4F !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(15, 107, 79, 0.25);
+}
+
+.duas-page .duas-cat-item-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.duas-page .duas-cat-icon {
+  font-size: 1.25rem;
+}
+
+.duas-page .duas-cat-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #292524;
+}
+
+.duas-page .duas-category-nav-item.active .duas-cat-name {
+  color: #ffffff;
+}
+
+.duas-page .duas-cat-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.duas-page .duas-cat-active-pill {
+  font-size: 0.72rem;
+  font-weight: 900;
+  background-color: #D4AF37;
+  color: #072e22;
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+
+.duas-page .duas-cat-count-pill {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: #f5f5f4;
+  color: #78716c;
+  font-size: 0.75rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.expand-btn:hover {
-  background: var(--primary-main);
-  color: var(--neutral-white);
-  transform: rotate(90deg);
+.duas-page .duas-cat-count-pill.active-count {
+  background-color: #0a4231;
+  color: #F3E4B2;
 }
 
-.dua-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height var(--transition-normal);
-}
-
-.dua-content.expanded {
-  max-height: 1000px;
-  padding: 24px;
-}
-
-.dua-arabic {
-  font-size: 1.6rem;
-  line-height: 2.2;
-  color: var(--text-primary);
-  margin-bottom: 20px;
-  font-family: 'Amiri', serif;
-  text-align: justify;
-}
-
-.dua-benefit {
-  background: var(--secondary-lighter);
+/* Daily Goal Box */
+.duas-page .duas-daily-goal-box {
+  margin-top: 20px;
   padding: 16px;
-  border-radius: 8px;
-  border-right: 4px solid var(--secondary-main);
-  margin-bottom: 20px;
-  font-size: 1.1rem;
-  line-height: 1.8;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #FAF9F4 0%, #F3F0E6 100%);
+  border: 1px solid rgba(212, 175, 55, 0.3);
 }
 
-.dua-benefit strong {
-  color: var(--secondary-dark);
-}
-
-.dua-actions {
+.duas-page .duas-daily-goal-header {
   display: flex;
-  gap: 12px;
-  padding-top: 16px;
-  border-top: 2px solid var(--neutral-gray);
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
 }
 
-@media (max-width: 992px) {
-  .duas-layout {
+.duas-page .duas-goal-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #072e22;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.duas-page .duas-goal-percentage {
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: #0F6B4F;
+}
+
+.duas-page .duas-goal-bar-track {
+  width: 100%;
+  height: 10px;
+  background-color: #e7e5e4;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.duas-page .duas-goal-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0F6B4F, #D4AF37);
+  border-radius: 9999px;
+  transition: width 0.35s ease;
+}
+
+.duas-page .duas-goal-desc {
+  font-size: 0.76rem;
+  color: #78716c;
+  margin: 8px 0 0;
+  text-align: right;
+  line-height: 1.5;
+}
+
+/* PDF Download Section */
+.duas-page .duas-pdf-download-wrap {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #f5f5f4;
+  text-align: center;
+}
+
+.duas-page .duas-pdf-action-link {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0F6B4F;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
+}
+
+.duas-page .duas-pdf-action-link:hover {
+  color: #B89223;
+}
+
+.duas-page .duas-pdf-action-link i {
+  color: #ef4444;
+}
+
+/* ========================================================
+   6. RESPONSIVE DESIGN
+   ======================================================== */
+@media (max-width: 1024px) {
+  .duas-page .duas-content-layout {
     grid-template-columns: 1fr;
   }
-  
-  .categories-sidebar {
+
+  .duas-page .duas-sidebar-sticky-card {
     position: static;
-    max-width: 100%;
   }
-  
-  .categories-list {
-    flex-direction: row;
-    overflow-x: auto;
-    padding-bottom: 8px;
+
+  .duas-page .duas-cards-column {
+    order: 2;
   }
-  
-  .category-btn {
-    flex-shrink: 0;
-    min-width: 180px;
+
+  .duas-page .duas-sidebar-column {
+    order: 1;
   }
 }
 
 @media (max-width: 768px) {
-  .dua-arabic {
-    font-size: 1.4rem;
+  .duas-page .duas-hero-title {
+    font-size: 2.2rem;
+  }
+
+  .duas-page .duas-search-box {
+    flex-direction: column;
+  }
+
+  .duas-page .duas-search-submit-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .duas-page .duas-category-banner {
+    padding: 20px;
+  }
+
+  .duas-page .duas-banner-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .duas-page .duas-arabic-naskh {
+    font-size: 1.35rem;
     line-height: 2;
   }
-  
-  .category-header h2 {
-    font-size: 1.5rem;
-  }
-  
-  .dua-card-header h3 {
-    font-size: 1.1rem;
+
+  .duas-page .duas-card {
+    padding: 20px 18px;
   }
 }
 
-@media (max-width: 480px) {
-  .duas-page {
-    padding: 24px 0;
+/* ========================================================
+   7. PRINT STYLES FOR PDF DOWNLOAD
+   ======================================================== */
+@media print {
+  body {
+    background: #ffffff !important;
   }
-  
-  .dua-arabic {
-    font-size: 1.2rem;
+
+  .duas-page .duas-hero-section,
+  .duas-page .duas-search-box,
+  .duas-page .duas-quick-chips,
+  .duas-page .duas-sidebar-column,
+  .duas-page .duas-banner-actions,
+  .duas-page .duas-card-quick-actions,
+  .duas-page .duas-counter-trigger-btn,
+  .duas-page .duas-load-more-section {
+    display: none !important;
   }
-  
-  .dua-content.expanded {
-    padding: 16px;
+
+  .duas-page .duas-content-layout {
+    grid-template-columns: 1fr !important;
   }
-  
-  .category-btn {
-    min-width: 150px;
-    padding: 12px;
+
+  .duas-page .duas-card {
+    page-break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+    margin-bottom: 20px;
   }
 }

@@ -1,180 +1,257 @@
+/* ═══════════════════════════════════════════════════════════════
+   TodayPage.css — Islamic Spiritual Content Dashboard
+   Matches the design from attached image & code
+═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap');
+
 .today-page {
+  background-color: #f5f5f5;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  padding: 2rem 0;
+  font-family: 'Tajawal', sans-serif;
+  color: #1f2937;
+  padding: 0;
+  margin: 0;
 }
 
-.page-subtitle {
-  font-family: 'Amiri', serif;
-  font-size: 1.1rem;
-  color: #fff;
+/* ── Hero Section ── */
+.today-hero {
+  background: linear-gradient(135deg, #c7a760 0%, #1f6e52 50%, #15523b 100%);
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 0 3rem 3rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 3rem;
+}
+
+.today-hero-pattern {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBRE-Gz-YfYWdMp1OmoRK8A7inpHEdZEyY54kAAJxNjdgdiuARiqayMxoeDpRSzNaaVMQogFMnRILsK-xI5_gqVE1g7-Na78oJbZNC5HEBe7T8RLaAkK48RdM9ByZQkxyfLxVXWnaHV6N-R4REh59pSc5oNBAXJvgQNaTQKM5qpU5JbJdFiN5-on2vhWI-JlKFfnEO0N3qo2ePejkrU6J9RLU5HAbOlIwue05AK0da0nm03NK1B3nzHsqRfs5Lq6JCp80NTqKz9Irs');
+  background-size: cover;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.today-hero-content {
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 3.5rem 1rem 4.5rem 1rem;
   text-align: center;
-  margin-top: 0.5rem;
+  position: relative;
+  z-index: 10;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
 }
 
-.today-content-grid {
+.today-hero-calligraphy {
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+  margin-bottom: 1.5rem;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+.today-hero-subtitle {
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  margin: 0;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Container ── */
+.today-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 5rem 1.5rem;
+}
+
+/* ── Cards Grid (2 columns on desktop) ── */
+.today-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
-  margin-top: 2rem;
 }
 
+/* ── Today Card ── */
 .today-card {
-  background: white;
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-  animation: fadeInUp 0.6s ease-out;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  background-color: #fdfcf9;
+  border-radius: 1.25rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  border: 1px solid #f3f4f6;
+  padding: 2rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 250ms ease, transform 250ms ease;
+  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBOhnQ8cHEKbSAtlGD6zJ8uhas8ePqInUv6M-bHi3zx38loJPB47CXaWPVlS3HuD0DFkJfWOA4OuL4Ce5n0P6Nw0mLKJRWlAylPr1r1jSgkZbL4vnKqpSE0Vk86oAeBSsKkzbIZ56m8jf1fSD-tFrHzL1bxHGSHKEkUFjUE8Tx63LQ0hIlSeuxJ53PEY-CdVJLYwtq_IbqPuv4QSmetTvBwFfHRENqfrtNbWT-IJhLD3aqmmKWnJFNyT3GufJcX26ub98Wpfko-cqU');
+  background-position: top left, bottom right;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 100px;
+  box-sizing: border-box;
 }
 
 .today-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
+  transform: translateY(-3px);
 }
 
-.ayah-card {
-  border-top: 5px solid #2C5F2D;
-}
-
-.hadith-card {
-  border-top: 5px solid #1976D2;
-}
-
-.dhikr-card {
-  border-top: 5px solid #E91E63;
-}
-
-.dua-card {
-  border-top: 5px solid #FF9800;
-}
-
-.card-header {
+/* Card Header */
+.today-card-header {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid #f0f0f0;
-}
-
-.card-icon {
-  font-size: 2rem;
-}
-
-.card-header h2 {
-  font-family: 'Amiri', serif;
-  color: #2C5F2D;
-  font-size: 1.6rem;
-  margin: 0;
-}
-
-.card-content {
-  font-family: 'Amiri', serif;
-}
-
-.dua-title {
-  font-size: 1.3rem;
-  color: #FF9800;
-  margin-bottom: 1rem;
-  font-weight: 600;
-}
-
-.arabic-text {
-  font-size: 1.4rem;
-  line-height: 2.2;
-  color: #333;
-  text-align: justify;
-  direction: rtl;
-  margin-bottom: 1rem;
-}
-
-.arabic-text.large {
-  font-size: 1.6rem;
-  font-weight: 600;
-  text-align: center;
-  color: #2C5F2D;
-}
-
-.card-benefit {
-  background: #f8f9fa;
-  border-radius: 12px;
-  padding: 1rem;
-  margin-top: 1rem;
-  border-left: 4px solid #4CAF50;
-}
-
-.card-benefit strong {
-  color: #2C5F2D;
-  display: block;
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-}
-
-.card-benefit p {
-  color: #555;
-  line-height: 1.8;
-  font-size: 1.05rem;
-  margin: 0;
-}
-
-.card-meta {
-  display: flex;
+  justify-content: center;
   gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.today-card-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1f6e52;
+  margin: 0;
+  font-family: 'Tajawal', sans-serif;
+}
+
+.today-card-icon {
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+}
+
+/* Card Body */
+.today-card-body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 1.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid #e0e0e0;
-  color: #666;
-  font-size: 0.95rem;
+  width: 100%;
 }
 
-.card-meta span {
-  white-space: nowrap;
-}
-
-.refresh-note {
-  text-align: center;
-  margin-top: 3rem;
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  backdrop-filter: blur(10px);
-}
-
-.refresh-note p {
+/* Arabic Text */
+.today-arabic-text {
   font-family: 'Amiri', serif;
-  font-size: 1.1rem;
-  color: white;
+  font-size: 1.75rem;
+  color: #111827;
+  line-height: 1.95;
+  margin: 0 0 1.25rem 0;
+  padding: 0.5rem 0;
+  direction: rtl;
+  text-align: center;
+}
+
+.today-arabic-large {
+  font-size: 2.25rem;
+  line-height: 1.85;
+}
+
+.today-arabic-dhikr {
+  font-size: 1.45rem;
+  line-height: 2.25;
+  text-align: justify;
+}
+
+/* English Translation */
+.today-translation {
+  color: #4b5563;
+  font-size: 1.05rem;
+  margin: 0 0 1.75rem 0;
+  font-style: italic;
+  font-family: 'Tajawal', sans-serif;
+  line-height: 1.6;
+}
+
+/* Meta Footer */
+.today-card-meta {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+  margin-top: auto;
+}
+
+/* Benefit Box */
+.today-benefit-box {
+  background-color: #f0f4f2;
+  border-right: 4px solid #1f6e52;
+  border-radius: 0.375rem 0 0 0.375rem;
+  padding: 1rem 1.25rem;
+  text-align: right;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  box-sizing: border-box;
+}
+
+.today-benefit-label {
+  display: block;
+  font-size: 0.875rem;
+  color: #1f6e52;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.today-benefit-text {
+  color: #374151;
+  font-size: 0.95rem;
   margin: 0;
 }
 
-@media (max-width: 768px) {
-  .today-content-grid {
+.today-benefit-mt-auto {
+  margin-top: auto;
+}
+
+/* Dua Sub-category */
+.today-dua-category {
+  color: #d4b76a;
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin: 0 0 0.75rem 0;
+}
+
+/* Count Pill Badge */
+.today-count-pill {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+  background-color: #f3f4f6;
+  padding: 0.4rem 1.25rem;
+  border-radius: 9999px;
+  margin-top: auto;
+  display: inline-block;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .today-cards-grid {
     grid-template-columns: 1fr;
   }
 
-  .arabic-text {
-    font-size: 1.2rem;
+  .today-hero {
+    border-radius: 0 0 2rem 2rem;
   }
 
-  .arabic-text.large {
-    font-size: 1.4rem;
+  .today-hero-calligraphy {
+    max-width: 250px;
   }
 
-  .card-meta {
-    flex-wrap: wrap;
+  .today-arabic-large {
+    font-size: 1.85rem;
+  }
+
+  .today-card {
+    padding: 1.5rem 1.25rem;
   }
 }

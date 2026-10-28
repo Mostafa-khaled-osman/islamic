@@ -175,58 +175,45 @@ function HomePage() {
 
           {/* Section heading */}
           <div className="hp-section-head">
-            <h2 className="hp-section-title">ميزات الموقع</h2>
+            <h2 className="hp-section-title">مميزات الموقع</h2>
           </div>
 
-          {/* ── Features / Articles grid
-              UNCHANGED: Link routing, feature data, animation delay ── */}
-          <div className="hp-articles-grid" role="list">
-            {features.map((feature, index) => (
-              <article
+          {/* ── Features Grid ── */}
+          <div className="hp-features-grid" role="list">
+            {features.map((feature) => (
+              <Link
                 key={feature.id}
-                className="hp-article-card"
+                to={feature.path}
+                className="hp-feature-card"
                 role="listitem"
-                style={{ '--delay': `${index * 0.1}s` }}
+                aria-label={feature.title}
               >
-                {/* Card icon banner (replaces article image) */}
-                <div
-                  className="hp-card-banner"
-                  aria-hidden="true"
-                >
-                  <span className="hp-card-icon" role="img" aria-label={feature.title}>
-                    {feature.icon}
-                  </span>
+                {/* Card Top: Icon Bubble + Category Tag */}
+                <div className="hp-card-header">
+                  <div className="hp-card-icon-bubble" aria-hidden="true">
+                    <span className="hp-card-icon">{feature.icon}</span>
+                  </div>
+                  <span className="hp-card-category-tag">{feature.category}</span>
                 </div>
 
+                {/* Card Body: Title & Description */}
                 <div className="hp-card-body">
-                  {/* Article title → navigates to route */}
-                  <h3 className="hp-card-title">
-                    <Link
-                      to={feature.path}
-                      className="hp-card-title-link"
-                      aria-label={`انتقل إلى ${feature.title}`}
-                    >
-                      {feature.title}
-                    </Link>
-                  </h3>
-
-                  <p className="hp-card-desc">{feature.description}</p>
-
-                  {/* Card meta row */}
-                  <footer className="hp-card-meta">
-                    <div className="hp-card-category">
-                      <IconTag />
-                      <span>{feature.category}</span>
-                    </div>
-                    <div className="hp-card-stats">
-                      <span className="hp-card-read-time">
-                        <IconClock />
-                        {feature.readTime}
-                      </span>
-                    </div>
-                  </footer>
+                  <h3 className="hp-card-title">{feature.title}</h3>
+                  <p className="hp-card-description">{feature.description}</p>
                 </div>
-              </article>
+
+                {/* Card Footer: Read Time & Action CTA */}
+                <div className="hp-card-footer">
+                  <div className="hp-card-read-time">
+                    <IconClock />
+                    <span>{feature.readTime}</span>
+                  </div>
+                  <div className="hp-card-action-btn">
+                    <span>تصفح</span>
+                    <span className="hp-action-arrow" aria-hidden="true">←</span>
+                  </div>
+                </div>
+              </Link>
             ))}
           </div>
         </main>
